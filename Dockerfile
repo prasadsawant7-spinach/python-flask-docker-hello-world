@@ -1,7 +1,17 @@
-FROM python:3.6
-MAINTAINER Shekhar Gulati "shekhargulati84@gmail.com"
-COPY . /app
+FROM python:3.10-alpine
+
+RUN mkdir /app
+
 WORKDIR /app
+
+COPY . .
+
+RUN python -m venv venv
+
+RUN source venv/bin/activate
+
 RUN pip install -r requirements.txt
-ENTRYPOINT ["python"]
-CMD ["app.py"]
+
+EXPOSE 5000
+
+CMD ["python", "app.py"]
